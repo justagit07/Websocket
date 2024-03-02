@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websocket io</title>
+</head>
+<body>
+
+     <form id="form" >
+
+         <div>Hey this is the frontend side hope i will get a job in march ....</div>
+         <button  type='submit' id="btn">send</button>
+         <input type="text" id="inp" placeholder="write your message"> 
+        </form>
+
+        <div> 
+            <h4>Your Inbox</h4>
+            <ul id="list">
+
+
+            </ul>
+            
+        
+        
+        
+        </div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket= io()
+        const input= document.getElementById('inp')
+        const form= document.getElementById('form')
+        const ul= document.getElementById('list')
+        form.addEventListener('submit', (e)=>
+        {
+            e.preventDefault()
+            socket.emit('chatmessage', input.value);
+            input.value=''
+        })
+        
+        socket.on("message", (e)=>{
+            
+           const item= document.createElement('p')
+             item.innerText= `${e}`
+
+             ul.appendChild(item)
+
+
+        })
+        
+        
+
+        </script>
+
+
+</body>
+</html>
